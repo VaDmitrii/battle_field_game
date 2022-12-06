@@ -10,7 +10,7 @@ from services import MoviesService
 class TestMoviesService:
 
     @pytest.fixture()
-    @patch('project.dao.MoviesDAO')
+    @patch('dao.MoviesDAO')
     def movies_dao_mock(self, dao_mock):
         dao = dao_mock()
         dao.get_by_id.return_value = Movie(

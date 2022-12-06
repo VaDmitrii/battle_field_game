@@ -1,6 +1,6 @@
-from .app_config import config
-from .dao.models.models import Genre, Director, Movie, User
-from .server import create_app, db
+from dao.models.models import Genre, Director, Movie, User
+from server import create_app, db
+from app_config import config
 
 app = create_app(config)
 

@@ -1,12 +1,12 @@
 version: "3.9"
 
 services:
-  hw26:
+  app:
     build:
       context: .
     image: dvasilevich/skypro_hw_26
     ports:
-      - 80:80
+      - 8000:8000
     volumes:
       - ./app_config.py:/code/default_config.py
     depends_on:

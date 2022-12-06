@@ -10,7 +10,7 @@ from services import DirectorsService
 class TestDirectorsService:
 
     @pytest.fixture()
-    @patch('project.dao.DirectorsDAO')
+    @patch('dao.DirectorsDAO')
     def directors_dao_mock(self, dao_mock):
         dao = dao_mock()
         dao.get_by_id.return_value = Director(id=1, name='test_director')

@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask_migrate import Migrate
 # from flask_cors import CORS
 
 from exceptions import BaseServiceError
@@ -16,6 +17,8 @@ def create_app(config_obj):
     app.config.from_object(config_obj)
 
     # CORS(app=app)
+    migrate = Migrate()
+    migrate.init_app(app, db)
     db.init_app(app)
     api.init_app(app)
 

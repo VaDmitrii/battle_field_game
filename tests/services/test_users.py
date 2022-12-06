@@ -10,7 +10,7 @@ from services import UsersService
 class TestUsersService:
 
     @pytest.fixture()
-    @patch('project.dao.UsersDAO')
+    @patch('dao.UsersDAO')
     def users_dao_mock(self, dao_mock):
         dao = dao_mock()
         dao.get_by_id.return_value = User(

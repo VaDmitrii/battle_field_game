@@ -1,8 +1,8 @@
 import pytest
 
-from project.config import TestingConfig
-from project.server import create_app
-from project.setup.db import db as database
+from app_config import TestingConfig
+from server import create_app
+from setup.db import db as database
 
 
 @pytest.fixture
