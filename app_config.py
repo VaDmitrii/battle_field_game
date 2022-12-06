@@ -39,7 +39,7 @@ class DevelopmentConfig(BaseConfig):
 
 class ProductionConfig(BaseConfig):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + BASE_DIR.joinpath('project.db').as_posix()
+    SQLALCHEMY_DATABASE_URI = "postgresql://{{ secrets.DB_USER }}:{{ secrets.DB_PASSWORD }}@localhost/" + BASE_DIR.joinpath('project.db').as_posix()
     SQLALCHEMY_ECHO = True
 
 

@@ -12,6 +12,17 @@ services:
     depends_on:
       pg:
         condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+  migrations:
+    build:
+      context: .
+    volumes:
+      - ./app_config.py:/code/default_config.py
+    depends_on:
+      pg:
+        condition: service_healthy
+    command: flask db upgrade
   pg:
     image: postgres:latest
     environment:
@@ -21,7 +32,7 @@ services:
     volumes:
       - ./hw26_data:/var/lib/postgresql/data 700
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      test: [ "CMD-SHELL", "pg_isready -U hw_26" ]
       interval: 5s
       timeout: 5s
       retries: 5
