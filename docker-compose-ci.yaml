@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  hw26:
+    build:
+      context: .
+    image: $IMAGE_TAG:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    environment:
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+    ports:
+      - 80:80
+    volumes:
+      - ./app_config.py:/code/default_config.py
+    depends_on:
+      pg:
+        condition: service_healthy
+  pg:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_NAME
+    volumes:
+      - ./hw26_data:/var/lib/postgresql/data 700
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
