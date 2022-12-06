@@ -4,6 +4,8 @@ from pathlib import Path
 from typing import Type
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+POSTGRES_USER = os.getenv('POSTGRES_USER')
+POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
 
 
 class BaseConfig:
@@ -39,7 +41,7 @@ class DevelopmentConfig(BaseConfig):
 
 class ProductionConfig(BaseConfig):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = "postgresql://{{ secrets.POSTGRES_USER }}:{{ secrets.POSTGRES_PASSWORD }}@localhost/" \
+    SQLALCHEMY_DATABASE_URI = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@pg/" \
                               + BASE_DIR.joinpath('project.db').as_posix()
     SQLALCHEMY_ECHO = True
 
